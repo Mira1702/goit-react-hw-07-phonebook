@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../Redux/actions';
+import * as operations from '../Redux/operations';
+import { getFilteredContacts } from '../Redux/selectors';
 
 const ContactItem = ({ id, name, number, onRemove }) => {
     return (
@@ -31,12 +32,12 @@ const Contacts = ({ contacts, onRemove }) => {
 
 const mapStateToProps = (state) => {
     return {
-        contacts: state.contacts.contacts,
+        contacts: getFilteredContacts(state),
     };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    onRemove: (id) => dispatch(actions.deleteContact(id)),
+    onRemove: (id) => dispatch(operations.deleteContact(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Contacts);

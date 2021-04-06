@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import shortid from 'shortid';
-import styles from './PhoneBook.module.css';
-import * as actions from '../Redux/actions';
+import styles from './Phonebook.module.css';
+import * as operations from '../Redux/operations';
+import { getContacts } from '../Redux/selectors';
 
 class PhoneBook extends Component {
     state = {
@@ -67,12 +68,13 @@ class PhoneBook extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        contacts: state.contacts.contacts,
+        contacts: getContacts(state),
     };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    onSubmit: ({ name, number }) => dispatch(actions.addContact(name, number)),
+    onSubmit: ({ name, number }) =>
+        dispatch(operations.addContact(name, number)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PhoneBook);
