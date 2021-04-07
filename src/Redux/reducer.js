@@ -10,10 +10,11 @@ import * as actions from './actions';
 // ];
 
 const contacts = createReducer([], {
-    [actions.fetchContactSuccess]: (_, { payload }) => payload,
+    [actions.fetchContactSuccess]: (_, { payload }) => [...payload],
     [actions.addContactSuccess]: (state, action) => [...state, action.payload],
-    [actions.deleteContactSuccess]: (state, { payload }) =>
-        state.filter((contact) => contact.id !== payload),
+    [actions.deleteContactSuccess]: (state, { payload }) => [
+        ...state.filter((contact) => contact.id !== payload),
+    ],
 });
 
 const filter = createReducer('', {
@@ -32,10 +33,16 @@ const loading = createReducer(false, {
     [actions.deleteContactError]: () => false,
 });
 
+// const error = createReducer(null, {
+//     [actions.fetchContactError]: (state, action) => [...state, action.payload],
+//     [actions.addContactError]: (state, action) => [...state, action.payload],
+//     [actions.deleteContactError]: (_, action) => [action.payload],
+// });
+
 const error = createReducer(null, {
-    [actions.fetchContactError]: (state, action) => [...state, action.payload],
-    [actions.addContactError]: (state, action) => [...state, action.payload],
-    [actions.deleteContactError]: (_, action) => [action.payload],
+    [actions.fetchContactError]: (error) => error,
+    [actions.addContactError]: (error) => error,
+    [actions.deleteContactError]: (error) => error,
 });
 
 export default combineReducers({

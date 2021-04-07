@@ -3,6 +3,7 @@ import PhoneBook from './Components/Phonebook';
 import Contacts from './Components/Contacts';
 import Filter from './Components/Filter';
 import { connect } from 'react-redux';
+import { fetchContact } from './Redux/operations';
 
 function App() {
     return (
@@ -16,8 +17,12 @@ function App() {
     );
 }
 
-const mapStateToProps = ({ contacts: { items } }) => ({
-    contacts: items,
+// const mapStateToProps = ({ contacts: { items } }) => ({
+//     contacts: items,
+// });
+
+const mapDispatchToProps = (dispatch) => ({
+    fetchContact: () => dispatch(fetchContact()),
 });
 
-export default connect(mapStateToProps, null)(App);
+export default connect(null, mapDispatchToProps)(App);

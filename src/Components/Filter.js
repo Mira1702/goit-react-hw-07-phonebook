@@ -23,7 +23,6 @@ const Filter = ({ value, onChange }) => {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state.contacts.filter);
     return {
         value: getFilter(state),
     };
