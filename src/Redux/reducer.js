@@ -10,10 +10,10 @@ import * as actions from './actions';
 // ];
 
 const contacts = createReducer([], {
-    [actions.fetchContactSuccess]: (_, { payload }) => [...payload],
+    [actions.fetchContactSuccess]: (_, { payload }) => payload,
     [actions.addContactSuccess]: (state, action) => [...state, action.payload],
-    [actions.deleteContactSuccess]: (state, { payload }) => [
-        ...state.filter((contact) => contact.id !== payload),
+    [actions.deleteContactSuccess]: (state, action) => [
+        state.filter((contact) => contact.id !== action.payload),
     ],
 });
 
